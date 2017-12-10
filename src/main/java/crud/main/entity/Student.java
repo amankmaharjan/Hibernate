@@ -1,4 +1,4 @@
-package entity;
+package crud.main.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "studenttbl")
+@Table(name = "studenttb")
 public class Student {
 	
 	@Id
