@@ -9,7 +9,7 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">create</property>
-    <mapping class="embeddable.entity.Student"/>
+    <mapping class="attributeoverride.entity.Student"/>
 
 </session-factory>
 </hibernate-configuration>
