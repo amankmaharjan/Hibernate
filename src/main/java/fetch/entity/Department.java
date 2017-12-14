@@ -1,4 +1,4 @@
-package mapping.onetomany.entity;
+package fetch.entity;
 
 
 
@@ -18,7 +18,7 @@ public class Department {
 	@Column(name = "departmentname")
 	private String departmentName;
 
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	List<Employee> employeeList=new LinkedList<>();
 
 	public List<Employee> getEmployeeList() {

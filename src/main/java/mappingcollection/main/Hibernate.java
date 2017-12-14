@@ -1,5 +1,6 @@
 package mappingcollection.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import mappingcollection.entity.Address;
@@ -11,22 +12,24 @@ import org.hibernate.cfg.Configuration;
 
 public class Hibernate {
 
-	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	static SessionFactory sf = new Configuration().configure().buildSessionFactory();
 
 	public void insert() {
         Session session = sf.openSession();
 		session.beginTransaction();
 
-		Address address1 = new Address("nepal", "kathmandu");
-		Address address2 = new Address("usa", "new york");
-
 		Student student1 = new Student();
 		student1.setFname("nischal");
 		student1.setLname("shakya");
 
-		
-		student1.getListOfAddress().add(address1);
-		student1.getListOfAddress().add(address2);
+		Address address1 = new Address("nepal", "kathmandu");
+		Address address2 = new Address("usa", "new york");
+
+		List<Address>addressList=new ArrayList<>();
+		addressList.add(address1);
+		addressList.add(address2);
+
+		student1.setListOfAddress(addressList);
 
 		session.save(student1);
 
@@ -47,14 +50,13 @@ public class Hibernate {
 
 			System.out.println(studentUpdate.getListOfAddress().toString());
 			Address studentAddress = studentUpdate.getListOfAddress().get(0);
-
-			studentAddress.setCity("patan");
-			studentAddress.setCountry("nepal");
-
-			studentUpdate.getListOfAddress().add(studentAddress);
-
+			System.out.println(studentAddress.toString());
+			studentAddress.setCity("delhi");
+			studentAddress.setCountry("india");
+//
+//
 			session.update(studentUpdate);
-
+//
 		}
 		session.getTransaction().commit();
 		session.close();
@@ -87,15 +89,16 @@ public class Hibernate {
 
 		System.out.println("student insert");
 		hibernate.insert();
-		hibernate.display();
+//		hibernate.display();
 
 		System.out.println("student update");
 		hibernate.update();
-		hibernate.display();
+//		hibernate.display();
 
-		System.out.println("student delete");
-		hibernate.delete();
-		hibernate.display();
+//		System.out.println("student delete");
+////		hibernate.delete();
+//		hibernate.display();
+		sf.close();
 	}
 
 }

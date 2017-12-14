@@ -1,6 +1,13 @@
-package mapping.manytoone.entity;
+package fetch.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "employeetbl")
@@ -16,10 +23,6 @@ public class Employee {
 
 	@Column(name = "lastname")
 	private String lname;
-
-	@ManyToOne
-	@JoinColumn(name = "department_id")
-	private Department department;
 
 
 	public int getEmployeeId() {
@@ -46,19 +49,7 @@ public class Employee {
 		this.lname = lname;
 	}
 
-	public Department getDepartment() {
-		return department;
-	}
 
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
-
-	@Override
-	public String toString() {
-		return "Employee [employeeId=" + employeeId + ", fname=" + fname + ", lname=" + lname + ", department="
-				+ department + "]";
-	}
 
 	public Employee() {
 		super();
@@ -70,4 +61,12 @@ public class Employee {
 		this.lname = lname;
 	}
 
+	@Override
+	public String toString() {
+		return "Employee{" +
+				"employeeId=" + employeeId +
+				", fname='" + fname + '\'' +
+				", lname='" + lname + '\'' +
+				'}';
+	}
 }

@@ -1,5 +1,4 @@
-package mapping.onetomany.entity;
-
+package mapping.manytomany.entity;
 
 
 import javax.persistence.*;
@@ -18,7 +17,7 @@ public class Department {
 	@Column(name = "departmentname")
 	private String departmentName;
 
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.ALL)
 	List<Employee> employeeList=new LinkedList<>();
 
 	public List<Employee> getEmployeeList() {

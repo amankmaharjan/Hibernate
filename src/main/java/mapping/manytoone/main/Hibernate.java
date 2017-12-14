@@ -1,26 +1,38 @@
-package mapping.onetoone.main;
+package mapping.manytoone.main;
 
 import java.util.List;
 
-import mapping.onetoone.entity.Department;
-import mapping.onetoone.entity.Employee;
+
+import mapping.manytoone.entity.Department;
+import mapping.manytoone.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class Hibernate {
 
-	SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	static SessionFactory sf = new Configuration().configure().buildSessionFactory();
 
 	public void insert() {
 		Session session = sf.openSession();
 		session.beginTransaction();
+
+		Department department1 = new Department("Human Resource");
+
 		Employee employee1 = new Employee();
 		employee1.setFname("Hari");
 		employee1.setLname("Prasad");
-		Department department1 = new Department("Human Resource");
+
+		Employee employee2 = new Employee();
+		employee2.setFname("raj");
+		employee2.setLname("Prasad");
+		employee2.setDepartment(department1);
 		employee1.setDepartment(department1);
+
+
 		session.save(employee1);
+		session.save(employee2);
+
 		session.save(department1);
 		session.getTransaction().commit();
 		session.close();
@@ -80,5 +92,6 @@ public class Hibernate {
 //		System.out.println("employee delete");
 //		hibernate.delete();
 //		hibernate.display();
+		sf.close();
 	}
 }
